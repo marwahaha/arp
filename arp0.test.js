@@ -18,7 +18,24 @@ it('Basic Macros', () => {
   expect(arp("[let! aName [symbol! sss]] aName")).toEqual('sss');
 
   expect(arp("let-mut!")).toBeInstanceOf(Function);
-  expect(arp("[let-mut! aName [symbol! sss]] aName")).toEqual('sss');
   expect(arp("assign!")).toBeInstanceOf(Function);
+  expect(arp("[let-mut! aName [symbol! sss]] aName")).toEqual('sss');
   expect(arp("[let-mut! aName [symbol! sss]] [assign! aName [symbol! goopher]] aName")).toEqual('goopher');
+
+  expect(arp("decide!")).toBeInstanceOf(Function);
+  expect(arp("[decide! T! [symbol! a] [symbol! b]]")).toEqual('a');
+  expect(arp("[decide! F! [symbol! a] [symbol! b]]")).toEqual('b');
+
+  expect(arp("do!")).toBeInstanceOf(Function);
+  expect(arp("[do! [symbol! 1] [symbol! 2]]")).toEqual('2');
+  expect(arp("[do! [symbol! 1] [symbol! test]]")).toEqual('test');
+  expect(arp("[let! SYM T!] [do! SYM]")).toEqual(true);
+  expect(arp("[let-mut! SYM T!] [do! [assign! SYM F!] SYM]")).toEqual(false);
+  expect(arp("[let-mut! SYM T!] [do! [assign! SYM F!]] SYM")).toEqual(false);
+  expect(arp("[let-mut! SYM T!] [do! [let! SYM F!]] SYM")).toEqual(true);
+
+  expect(arp("loop!")).toBeInstanceOf(Function);
+  expect(arp("break!")).toBeInstanceOf(Function);
+  expect(arp("[let-mut! i F!][loop! [decide! i [break! i] [assign! i T!]]]")).toEqual(true);
+  expect(arp("[let-mut! i T!][loop! [decide! i [assign! i F!] [break! i]]]")).toEqual(false);
 });
