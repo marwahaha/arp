@@ -61,7 +61,9 @@ function arp0statement(ast, context) {
     case 'literal!': return function () {
       return [...arguments]
     };
-    case 'let!': return (name, param)=>{
+    case 'assign!':
+    case 'let!':
+    case 'let-mut!': return (name, param)=>{
       return context.bindings[name] = arp0statement(param, context);
     };
     default:

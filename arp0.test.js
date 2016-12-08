@@ -16,4 +16,9 @@ it('Basic Macros', () => {
   expect(arp("[let! aName F!]")).toEqual(false);
   expect(arp("[let! aName [symbol! sss]]")).toEqual('sss');
   expect(arp("[let! aName [symbol! sss]] aName")).toEqual('sss');
+
+  expect(arp("let-mut!")).toBeInstanceOf(Function);
+  expect(arp("[let-mut! aName [symbol! sss]] aName")).toEqual('sss');
+  expect(arp("assign!")).toBeInstanceOf(Function);
+  expect(arp("[let-mut! aName [symbol! sss]] [assign! aName [symbol! goopher]] aName")).toEqual('goopher');
 });
