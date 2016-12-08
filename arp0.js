@@ -95,6 +95,12 @@ function arp0statement(ast, context) {
     case 'break!': return (value) => {
       throw new LoopBreak(arp0statement(value, context));
     };
+    case 'macro!': return (paramName, clause) => {
+      return function(){
+        context.bindings[paramName] = [...arguments];
+        return arp0statement(clause, context);
+      };
+    };
     default:
       return getBindedValue(ast, context);
   }

@@ -38,4 +38,9 @@ it('Basic Macros', () => {
   expect(arp("break!")).toBeInstanceOf(Function);
   expect(arp("[let-mut! i F!][loop! [decide! i [break! i] [assign! i T!]]]")).toEqual(true);
   expect(arp("[let-mut! i T!][loop! [decide! i [assign! i F!] [break! i]]]")).toEqual(false);
+
+  expect(arp("macro!")).toBeInstanceOf(Function);
+  expect(arp("[[macro! PARAMS PARAMS] T!]")).toEqual(['T!']);
+  expect(arp("[[macro! PARAMS PARAMS] F!]")).toEqual(['F!']);
+  expect(arp("[[macro! PARAMS T!] F!]")).toEqual(true);
 });
