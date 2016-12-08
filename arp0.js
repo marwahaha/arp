@@ -1,7 +1,3 @@
-function statement(input) {
-  return ['symbol!', 'SYMB'];
-}
-
 function parse(input) {
   function parsePiece(input) {
     input = input.trim();
@@ -38,17 +34,23 @@ function parse(input) {
   return result.value;
 }
 
-export default function(input) {
+export default function arp0(input) {
   const ast = parse(input);
   switch (ast) {
     case 'T!':
       return true;
     case 'F!':
       return false;
+    case 'symbol!':
+      return symb => symb;
+    case 'literal!':
+      return function () {
+        return [...arguments]
+      };
     default:
       if(Array.isArray(ast)){
-        return ast[1];
+        return arp0(ast[0]).apply(null, ast.slice(1));
       }
-      return () => {};
+      return null;
   }
 }
