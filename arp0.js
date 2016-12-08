@@ -51,6 +51,6 @@ export default function arp0(input) {
       if(Array.isArray(ast)){
         return arp0(ast[0]).apply(null, ast.slice(1));
       }
-      return null;
+      throw new Error("Invalid value");
   }
 }
