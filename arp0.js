@@ -53,7 +53,12 @@ class Arp0{
 
   evalElement(ast){
     if(Array.isArray(ast)){
-      return this.evalElement(ast[0], context).apply(this, ast.slice(1));
+      const element0 = this.evalElement(ast[0]);
+      if(element0 instanceof Function){
+        return element0.apply(this, ast.slice(1));
+      } else {
+        return this.evalElement(element0);
+      }
     }
     switch (ast) {
       case 'T!': return true;

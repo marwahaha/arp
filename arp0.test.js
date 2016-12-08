@@ -7,10 +7,14 @@ it('Basic Macros', () => {
   expect(arp("symbol!")).toBeInstanceOf(Function);
   expect(arp("[symbol! SYMB]")).toBe("SYMB");
   expect(arp("[symbol! 7990]")).toBe("7990");
+  expect(arp('[symbol! T!]')).toBe("T!");
+  expect(arp('[[symbol! T!]]')).toBe(true);
 
   expect(arp("literal!")).toBeInstanceOf(Function);
   expect(arp("[literal! 7990]")).toEqual(["7990"]);
   expect(arp("[literal! 7990 test]")).toEqual(["7990", "test"]);
+  expect(arp("[literal! literal! test]")).toEqual(["literal!", "test"]);
+  expect(arp("[[literal! literal! test]]")).toEqual(["test"]);
 
   expect(arp("let!")).toBeInstanceOf(Function);
   expect(arp("[let! aName T!]")).toEqual(true);
