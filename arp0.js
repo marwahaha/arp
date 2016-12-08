@@ -73,8 +73,8 @@ class Arp0{
       };
       case 'assign!':return (name, param)=> this.context.assign(name, this.evalElement(param));
       case 'decide!': return (test, trueClause, falseClause) => {
-        const chosenClause = this.evalElement(test, context)? trueClause: falseClause;
-        return this.evalElement(chosenClause, context);
+        const chosenClause = this.evalElement(test)? trueClause: falseClause;
+        return this.evalElement(chosenClause);
       }
       case 'do!': return function () {
         const derived = new Arp0(this.context.createDerived());
@@ -83,7 +83,7 @@ class Arp0{
       case 'loop!': return (clause) => {
         try {
           for(;;){
-            this.evalElement(clause, context);
+            this.evalElement(clause);
           }
         } catch (e){
           if(e instanceof LoopBreak) {
@@ -93,13 +93,13 @@ class Arp0{
         }
       };
       case 'break!': return (value) => {
-        throw new LoopBreak(this.evalElement(value, context));
+        throw new LoopBreak(this.evalElement(value));
       };
       case 'macro!': return (paramName, clause) => {
         return function(){
           const derived = new Arp0(this.context.createDerived());
           derived.context.bindings[paramName] = [...arguments];
-          return derived.evalElement(clause, context);
+          return derived.evalElement(clause);
         };
       };
       default:
