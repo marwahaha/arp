@@ -65,4 +65,6 @@ it('Basic Functions', () => {
   expect(arp('[= F! T!]')).toBe(false);
   expect(arp('[= [symbol! test] [symbol! test]]')).toBe(true);
   expect(arp('[= [symbol! test] [symbol! test2]]')).toBe(false);
+
+  expect(arp('ordered?')).toBeInstanceOf(Function);
 });
