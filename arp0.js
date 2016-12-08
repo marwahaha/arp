@@ -27,16 +27,19 @@ class Context {
     return value;
   }
 
+  let(symbol, value){
+    this.bindings[symbol] = value;
+  }
 
-  assign(symbol, param) {
+  assign(symbol, value) {
     const oldValue = this.bindings[symbol];
     if(typeof oldValue === 'undefined'){
       if(!this.base){
         throw new Error("Symbol '"+symbol+"' not found");
       }
-      return this.base.assign(symbol, param, this.base);
+      return this.base.assign(symbol, value, this.base);
     } else {
-      return this.bindings[symbol] = param;
+      return this.bindings[symbol] = value;
     }
   }
 }
@@ -44,6 +47,8 @@ class Context {
 class Arp0{
   constructor(context){
     this.context = context = context || new Context();
+    this.context.let('head', (l) => this.evalElement(l)[0]);
+    this.context.let('tail', (l) => this.evalElement(l).slice(1))
   }
 
   evalElement(ast){
@@ -97,7 +102,7 @@ class Arp0{
     }
   }
 
-  eval(ast, context) {
+  eval(ast) {
     return ast.reduce((prev, statement) => {
       return this.evalElement(statement);
     }, null);

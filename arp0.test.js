@@ -10,6 +10,7 @@ it('Basic Macros', () => {
 
   expect(arp("literal!")).toBeInstanceOf(Function);
   expect(arp("[literal! 7990]")).toEqual(["7990"]);
+  expect(arp("[literal! 7990 test]")).toEqual(["7990", "test"]);
 
   expect(arp("let!")).toBeInstanceOf(Function);
   expect(arp("[let! aName T!]")).toEqual(true);
@@ -43,4 +44,13 @@ it('Basic Macros', () => {
   expect(arp("[[macro! PARAMS PARAMS] T!]")).toEqual(['T!']);
   expect(arp("[[macro! PARAMS PARAMS] F!]")).toEqual(['F!']);
   expect(arp("[[macro! PARAMS T!] F!]")).toEqual(true);
+});
+
+it('Basic Functions', () => {
+  expect(arp("head")).toBeInstanceOf(Function);
+  expect(arp("[head [literal! test]]")).toEqual("test");
+  expect(arp("[head [literal! test test2]]")).toEqual("test");
+  expect(arp("[tail [literal! test]]")).toEqual([]);
+  expect(arp("[tail [literal! test test2]]")).toEqual(['test2']);
+  expect(arp("[head [tail [literal! test test2]]]")).toEqual('test2');
 });
