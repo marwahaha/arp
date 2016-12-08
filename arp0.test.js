@@ -57,4 +57,12 @@ it('Basic Functions', () => {
   expect(arp("[tail [literal! test]]")).toEqual([]);
   expect(arp("[tail [literal! test test2]]")).toEqual(['test2']);
   expect(arp("[head [tail [literal! test test2]]]")).toEqual('test2');
+
+  expect(arp('=')).toBeInstanceOf(Function);
+  expect(arp('[= T! T!]')).toBe(true);
+  expect(arp('[= F! F!]')).toBe(true);
+  expect(arp('[= T! F!]')).toBe(false);
+  expect(arp('[= F! T!]')).toBe(false);
+  expect(arp('[= [symbol! test] [symbol! test]]')).toBe(true);
+  expect(arp('[= [symbol! test] [symbol! test2]]')).toBe(false);
 });

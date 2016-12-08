@@ -48,7 +48,8 @@ class Arp0{
   constructor(context){
     this.context = context = context || new Context();
     this.context.let('head', (l) => this.evalElement(l)[0]);
-    this.context.let('tail', (l) => this.evalElement(l).slice(1))
+    this.context.let('tail', (l) => this.evalElement(l).slice(1));
+    this.context.let('=', (v1, v2) => (this.evalElement(v1) === this.evalElement(v2)));
   }
 
   evalElement(ast){
