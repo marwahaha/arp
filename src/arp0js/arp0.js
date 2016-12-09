@@ -116,6 +116,8 @@ class Arp0{
   }
 }
 
+export {Arp0};
+
 export default function(input) {
   const ast = parse(input);
   const arp = new Arp0();

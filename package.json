@@ -2,9 +2,13 @@
   "name": "arp",
   "version": "0.1.0",
   "description": "A lispy language with brackets and arrays",
-  "main": "index.js",
+  "main": "src/arp0js/arp0.js",
+  "files": ["src"],
   "scripts": {
-    "test": "jest"
+    "test": "jest src/*",
+    "build": "babel src -d lib",
+    "cli": "node lib/cli/arp-cli.js",
+    "precli": "npm run build"
   },
   "keywords": [
     "language",
