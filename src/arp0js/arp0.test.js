@@ -1,9 +1,11 @@
 import arp from './arp0';
 
-it('Basic Macros', () => {
+it('Has predefined values', () => {
   expect(arp("T!")).toBe(true);
   expect(arp("F!")).toBe(false);
+});
 
+it('Basic Macros', () => {
   expect(arp("symbol!")).toBeInstanceOf(Function);
   expect(arp("[symbol! SYMB]")).toBe("SYMB");
   expect(arp("[symbol! 7990]")).toBe("7990");
