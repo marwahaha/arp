@@ -55,6 +55,9 @@ class Arp0{
 
   evalElement(ast){
     if(Array.isArray(ast)){
+      if(ast.length == 0){
+        return [];
+      }
       const element0 = this.evalElement(ast[0]);
       if(element0 instanceof Function){
         return element0.apply(this, ast.slice(1));

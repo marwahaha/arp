@@ -1,6 +1,7 @@
 import arp from './arp0';
 
 it('Has predefined values', () => {
+  expect(arp("[]")).toBeInstanceOf(Array);
   expect(arp("T!")).toBe(true);
   expect(arp("F!")).toBe(false);
 });
