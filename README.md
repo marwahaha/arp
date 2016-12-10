@@ -13,6 +13,8 @@ environment. This environment is constrained, but with it we can run the arp*
 (or just arp), our self-hosted compiler. And arp* then compile itself,
 giving us the unconstrained version of arp environment.
 
+The process is futher summarized on the following diagram:
+
 ```
 External Language
         ^
@@ -32,4 +34,41 @@ External Language
        arp*
        ^  \
         \_/  
+```
+
+The syntax
+==========
+
+We have a very simple syntax:
+
+```
+program ::= list ;
+list    ::= { element } ;
+element ::= symbol | "[", list ,"]" ;
+symbol  ::= (* Any valid character except "[", "]", control characters and space*);
+```
+
+So those are sintatically valid programs:
+
+```
+Hello World
+```
+
+```
+Hello
+World
+```
+
+```
+[[Hello] World]
+```
+
+But these are invalid ones:
+
+```
+]Hello[
+```
+
+```
+[[[[Hello]
 ```
