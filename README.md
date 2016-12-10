@@ -118,9 +118,13 @@ Intrisic macros
 As it is obvious from example before, our language can't do anything if we don't
 have some symbols already defined. This table bellow has the predefined macros.
 By convention, every macro is posfixed by '!'. The following section presents
-their
+them.
 
-literal!
---------
+!literal (!)
+------------
 
- | return its first parameter as it is (unevaluated)
+    [! ELEMENT1] => ELEMENT1
+
+This is the "literal!" macro. It returns its first parameter unevaluated.
+It is useful to use symbols or lists as values and themselves.
+It is so useful that it can be abreviated as just !.

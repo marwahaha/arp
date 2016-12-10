@@ -65,10 +65,8 @@ class Arp0{
     switch (ast) {
       case 'T!': return true;
       case 'F!': return false;
-      case 'symbol!': return symb => symb;
-      case 'literal!': return function () {
-        return [...arguments]
-      };
+      case '!':
+      case 'literal!': return symb => symb;
       case 'let!':
       case 'let-mut!': return (name, param)=>{
         return this.context.bindings[name] = this.evalElement(param);
