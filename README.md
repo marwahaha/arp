@@ -75,8 +75,8 @@ But these are invalid ones:
 
 Semantics
 =========
-Semantically, given the an ast as a list we walk each element in that list and
-evaluate it as follows:
+Semantically, we look at the ast as a list and we walk each element on it,
+evaluating as follows:
 
 - If the element is a symbol, *return* the value associated with that
   symbol, if any, otherwise it is an error;
@@ -88,6 +88,8 @@ evaluate it as follows:
       function with the evaluated tail as parameters.
     - Otherwise evaluate it again the evaluated head and *return* its result. The
       tail must be empty, being an error otherwise.
+
+The value returned by the last element is the return value of the program.
 
 ### Examples
 
@@ -103,6 +105,10 @@ Program | Evals to
  `[B]`  | 1
  `[C A]`| 3
 
+As it is obvious from example before, our language can't do anything if we don't
+have some symbols already defined. So the following are the predefined symbols,
+separated in values, macros and functions.
+
 Intrisic values
 ===============
 
@@ -116,15 +122,12 @@ Symbol  | Value
 Intrisic macros
 ===============
 
-As it is obvious from example before, our language can't do anything if we don't
-have some symbols already defined. This table bellow has the predefined macros.
-By convention, every macro is posfixed by '!'. The following section presents
-them.
-
 We use some simple anotation below, in the form: `SIGNATURE => RESULT;`.
-The SIGNATURE is how you call the macro, the RESULT is its returned value. In
-both cases, symbols and lower cases means to be let as it is, upper case is to
-be replaced by some suitable value.
+The SIGNATURE is how you call the macro, the RESULT is its returned value. Side
+effects are defined on the text bellow it. symbols in lower cases or puncutation
+means to be let as it is, symbols in upper case are to be replaced by some
+suitable value, also to be mentioned on the text bellow it. We also use the
+convention of naming all macros with the '!' posfix.
 
 literal! (!)
 ------------
@@ -133,8 +136,8 @@ literal! (!)
     [literal! ELEMENT1] => ELEMENT1
 
 This is the "literal!" macro. It returns its first parameter unevaluated.
-It is useful to use symbols or lists as values and themselves.
-It is so useful that it can be abreviated as just !.
+It is useful to use symbols or lists as values themselves.
+It is so useful that it can be abreviated as just `!`.
 
 let!, let-mut!
 --------------
@@ -208,7 +211,9 @@ macro!
 
 Creates a new macro and return it. The returned macro will, when called,
 evaluate [EL], with all occurences of the symbol PARAM replaced by the the
-parameter **list**, on a scope derived from the **calling** site.
+parameter **list**, on a scope derived from the **calling** site. macros are
+generally stored with let! using the '!' posfix, as convention, but it is not 
+mandatory.
 
 ###Example
 
