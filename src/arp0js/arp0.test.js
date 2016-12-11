@@ -62,6 +62,15 @@ it('Basic Functions', () => {
   expect(arp("[tail [! [test test2]]]")).toEqual(['test2']);
   expect(arp("[head [tail [! [test test2]]]]")).toEqual('test2');
 
+  expect(arp('empty?')).toBeInstanceOf(Function);
+  expect(arp('[empty? []]')).toBe(true);
+  expect(arp('[empty? [! []]')).toBe(false);
+
+  expect(arp('node')).toBeInstanceOf(Function);
+  expect(arp('[node [] []]')).toEqual([[]]);
+  expect(arp('[node [] [! [[]] ]]')).toEqual([[], []]);
+  expect(arp('[node [! test] [! [[]] ]]')).toEqual(['test', []]);
+
   expect(arp('=')).toBeInstanceOf(Function);
   expect(arp('[= T! T!]')).toBe(true);
   expect(arp('[= F! F!]')).toBe(true);
@@ -69,6 +78,4 @@ it('Basic Functions', () => {
   expect(arp('[= F! T!]')).toBe(false);
   expect(arp('[= [! test] [! test]]')).toBe(true);
   expect(arp('[= [! test] [! test2]]')).toBe(false);
-
-  expect(arp('ordered?')).toBeInstanceOf(Function);
 });

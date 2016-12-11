@@ -212,7 +212,7 @@ macro!
 Creates a new macro and return it. The returned macro will, when called,
 evaluate [EL], with all occurences of the symbol PARAM replaced by the the
 parameter **list**, on a scope derived from the **calling** site. macros are
-generally stored with let! using the '!' posfix, as convention, but it is not 
+generally stored with let! using the '!' posfix, as convention, but it is not
 mandatory.
 
 ###Example
@@ -254,3 +254,45 @@ value would be `isGud`.
   ]
 ]
 ```
+
+Intrisic Functions
+==================
+
+head
+----
+
+    [head L] => <symbol> | <list>
+
+Returns the first element of a given list. It is an error to call it on an empty
+list.
+
+tail
+----
+
+    [tail L] => <list>
+
+Return the list of elements on L except the head. Calling it on an empty list
+returns another empty list.
+
+empty?
+------
+
+    [empty? L] => <boolean>
+
+Checks if a list is empty.
+
+node
+----
+
+    [node V L] => <list>
+
+Create a list with V being its head and L being its tail.
+
+=
+-----
+
+    [= V1 V2] => <boolean>
+
+Compare two values, and return true if equal, false otherwise. The two
+parameters must have the same type and it has to be either Symbol or Boolean,
+otherwise is an error.
