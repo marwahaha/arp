@@ -47,11 +47,15 @@ class Context {
 class Arp0{
   constructor(context){
     this.context = context = context || new Context();
-    this.context.let('head', (l) => this.evalElement(l)[0]);
-    this.context.let('tail', (l) => this.evalElement(l).slice(1));
-    this.context.let('empty?', (l) => l.length === 0);
-    this.context.let('node', (h, t) => [this.evalElement(h)].concat(this.evalElement(t)));
-    this.context.let('=', (v1, v2) => (this.evalElement(v1) === this.evalElement(v2)));
+    this.addMacro('head', (l) => this.evalElement(l)[0]);
+    this.addMacro('tail', (l) => this.evalElement(l).slice(1));
+    this.addMacro('empty?', (l) => l.length === 0);
+    this.addMacro('node', (h, t) => [this.evalElement(h)].concat(this.evalElement(t)));
+    this.addMacro('=', (v1, v2) => (this.evalElement(v1) === this.evalElement(v2)));
+  }
+
+  addMacro(name, func){
+    this.context.let(name, func);
   }
 
   evalElement(ast){

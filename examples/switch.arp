@@ -1,0 +1,19 @@
+[let! switch! [macro! params [do!
+  [let! expression [[head params]]]
+  [let-mut! cases [tail params]]
+  [loop! [do!
+    [decide! [empty? cases]
+      [break! []]
+      []
+    ]
+    [let! current [head cases]]
+    [let! condition [head current]]
+    [decide! [= expression [condition]]
+      [do!
+        [let! value [head [tail current]]]
+        [break! [value]]
+      ]
+      [assign! cases [tail cases]]
+    ]
+  ]]
+]]]

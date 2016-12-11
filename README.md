@@ -231,7 +231,10 @@ The code below implements a switch statement.
     [let! current [head cases]]
     [let! condition [head current]]
     [decide! [= expression [condition]]
-      [do! [let! value [tail current]] [break [value]]]
+      [do!
+        [let! value [head [tail current]]]
+        [break! [value]]
+      ]
       [assign! cases [tail cases]]
     ]
   ]]
