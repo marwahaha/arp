@@ -261,7 +261,7 @@ value would be `isGud`.
 Intrisic Functions
 ==================
 
-head
+`head`
 ----
 
     [head L] => <symbol> | <list>
@@ -269,7 +269,7 @@ head
 Returns the first element of a given list. It is an error to call it on an empty
 list.
 
-tail
+`tail`
 ----
 
     [tail L] => <list>
@@ -277,21 +277,21 @@ tail
 Return the list of elements on L except the head. Calling it on an empty list
 returns another empty list.
 
-empty?
+`empty?`
 ------
 
     [empty? L] => <boolean>
 
 Checks if a list is empty.
 
-node
+`node`
 ----
 
     [node V L] => <list>
 
 Create a list with V being its head and L being its tail.
 
-=
+`=`
 -----
 
     [= V1 V2] => <boolean>
