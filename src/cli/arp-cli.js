@@ -14,22 +14,17 @@ arp.addMacro('import', function(f) {
   const content = fs.readFileSync(arp.evalElement(f).join('/'), {'encoding': 'utf8'});
   return arp.eval(parser(content));
 });
-console.log("Welcome to the arp-cli. Type .help for help");
+
+arp.addMacro('.help', () => "Type a statement or [.exit] to quit" );
+arp.addMacro('.exit', () => rl.close());
+
+console.log("Welcome to the arp-cli. Type [.help] for help");
 rl.prompt();
 rl.on('line', (line)=>{
-  switch (line) {
-    case '.help':
-      console.log("Type a statement or .exit to quit");
-      break;
-    case '.exit':
-      rl.close();
-      break;
-    default:
-      try{
-        console.log(arp.eval(parser(line)));
-      } catch(e){
-        console.log(e);
-      }
+  try{
+    console.log(arp.eval(parser(line)));
+  } catch(e){
+    console.log(e);
   }
   rl.prompt();
 }).on('close', () => {
