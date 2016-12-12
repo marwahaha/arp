@@ -64,7 +64,8 @@ it('Basic Functions', () => {
 
   expect(arp('empty?')).toBeInstanceOf(Function);
   expect(arp('[empty? []]')).toBe(true);
-  expect(arp('[empty? [! []]')).toBe(false);
+  expect(arp('[empty? [! [test]]')).toBe(false);
+  expect(arp('[empty? [tail [! [test]]]')).toBe(true);
 
   expect(arp('node')).toBeInstanceOf(Function);
   expect(arp('[node [] []]')).toEqual([[]]);

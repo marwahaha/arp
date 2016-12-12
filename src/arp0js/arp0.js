@@ -49,7 +49,7 @@ class Arp0{
     this.context = context = context || new Context();
     this.addMacro('head', (l) => this.evalElement(l)[0]);
     this.addMacro('tail', (l) => this.evalElement(l).slice(1));
-    this.addMacro('empty?', (l) => l.length === 0);
+    this.addMacro('empty?', (l) => this.evalElement(l).length === 0);
     this.addMacro('node', (h, t) => [this.evalElement(h)].concat(this.evalElement(t)));
     this.addMacro('=', (v1, v2) => (this.evalElement(v1) === this.evalElement(v2)));
   }
