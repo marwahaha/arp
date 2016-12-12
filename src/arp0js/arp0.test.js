@@ -52,6 +52,7 @@ it('Basic Macros', () => {
   expect(arp("[[macro! PARAMS PARAMS] T!]")).toEqual(['T!']);
   expect(arp("[[macro! PARAMS PARAMS] F!]")).toEqual(['F!']);
   expect(arp("[[macro! PARAMS T!] F!]")).toEqual(true);
+  expect(arp("[let! PARAMS T!][[macro! PARAMS [[head PARAMS]]] PARAMS]")).toEqual(true);
 });
 
 it('Basic Functions', () => {

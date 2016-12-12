@@ -105,9 +105,18 @@ class Arp0{
       };
       case 'macro!': return (paramName, clause) => {
         return function(){
+          const paramValue = ['!', [...arguments]];
           const derived = new Arp0(this.context.createDerived());
-          derived.context.bindings[paramName] = [...arguments];
-          return derived.evalElement(clause);
+          return derived.evalElement(replaceParams(clause));
+          function replaceParams(clause) {
+            if(clause===paramName){
+              return paramValue;
+            }
+            if(Array.isArray(clause)){
+              return clause.map(replaceParams);
+            }
+            return clause;
+          }
         };
       };
       default:
