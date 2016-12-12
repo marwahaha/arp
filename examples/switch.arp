@@ -7,6 +7,10 @@
       []
     ]
     [let! current [head cases]]
+    [decide! [empty? [tail current]]
+      [break! [[head current]]]
+      []
+    ]
     [let! condition [head current]]
     [decide! [= expression [condition]]
       [do!

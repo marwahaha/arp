@@ -1,4 +1,4 @@
-[switch! [! potato]
+[switch! [! trek]
   [[! bacon]
     [! isFat]
   ]
@@ -8,4 +8,5 @@
   [[! beef]
     [! isGudToo]
   ]
+  [[! idk]]
 ]
