@@ -1,4 +1,4 @@
-[let! switch! [macro! params [do!
+[macro! params [do!
   [let! expression [[head params]]]
   [let-mut! cases [tail params]]
   [loop! [do!
@@ -20,4 +20,4 @@
       [assign! cases [tail cases]]
     ]
   ]]
-]]]
+]]
