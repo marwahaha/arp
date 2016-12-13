@@ -1,0 +1,27 @@
+[macro! params_base [do!
+  [let-mut! arguments [head params_base]]
+  [let-mut! body [node [head [tail params_base]] []]]
+  [loop! [decide! [empty? arguments]
+    [break! []]
+    [do!
+      [assign! body [node [! [assign! arguments [tail arguments]]]  body]]
+      [let! expanded_param [node [! let!] [node [head arguments] [! [[head arguments]]]]]]
+      [assign! body [node expanded_param body]]
+      [assign! arguments [tail arguments]]
+    ]
+  ]]
+  [assign! body [node [! [let! arguments [do!
+    [let-mut! arguments_raw params_derived]
+    [let-mut! arguments_proc []]
+    [loop! [decide! [empty? arguments_raw]
+      [break! arguments_proc]
+      [do!
+        [assign! arguments_proc [node [[head arguments_raw]] arguments_proc]]
+        [assign! arguments_raw [tail arguments_raw]]
+      ]
+    ]]
+  ]
+  ]] body]]
+  [assign! body [node [! macro!] [node [! params_derived] [node [node [! do!] body] []]]]]
+  [body]
+]]

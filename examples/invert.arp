@@ -1,0 +1,11 @@
+[nr-def! [ls] [do!
+  [let-mut! normal ls]
+  [let-mut! inverted []]
+  [loop! [decide! [empty? normal]
+    [break! inverted]
+    [do!
+      [assign! inverted [node [head normal] inverted]]
+      [assign! normal [tail normal]]
+    ]
+  ]]
+]]

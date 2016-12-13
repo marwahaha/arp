@@ -1,0 +1,7 @@
+[nr-def! [ls] [do!
+  [let! internalInvert [nr-def! [ls acc f] [decide! [empty? ls]
+    acc
+    [f [tail ls] [node [head ls] acc] f]
+  ]]]
+  [internalInvert ls [] internalInvert]
+]]
