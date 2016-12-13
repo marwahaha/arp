@@ -1,0 +1,11 @@
+[nr-def! [func initial ls] [do!
+  [let-mut! mls ls]
+  [let-mut! value initial]
+  [loop! [decide! [empty? mls]
+    [break! value]
+    [do!
+      [assign! value [func value [head mls]]]
+      [assign! mls [tail mls]]
+    ]
+  ]]
+]]
