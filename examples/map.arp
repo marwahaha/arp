@@ -1,0 +1,11 @@
+[nr-def! [func ls] [do!
+  [let-mut! acc ls]
+  [let-mut! result []]
+  [loop! [decide! [empty? acc]
+    [break! [invert result]]
+    [do!
+      [assign! result [node [func [head acc]] result]]
+      [assign! acc [tail acc]]
+    ]
+  ]]
+]]
