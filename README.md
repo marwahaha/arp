@@ -137,7 +137,7 @@ literal! (!)
 
 This is the "literal!" macro. It returns its first parameter unevaluated.
 It is useful to use symbols or lists as values themselves.
-It is so useful that it can be abreviated as just `!`.
+It is so useful that it can be abbreviated as just `!`.
 
 let!, let-mut!
 --------------
